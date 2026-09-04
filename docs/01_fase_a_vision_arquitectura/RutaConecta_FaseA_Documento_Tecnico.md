@@ -51,19 +51,7 @@ Según el estándar TOGAF, el primer paso de la Fase A consiste en confirmar el 
 
 ### 2.1. Matriz Poder – Interés
 
-```
-                  Estrategia de Gestión de Stakeholders
-   ALTO ┌──────────────────────────────┬──────────────────────────────┐
-        │      MANTENER SATISFECHO     │      GESTIONAR DE CERCA      │
-  P     │  • Agencias de Viaje B2B     │  • Dirección General         │
-  O     │    (Clientes)                │    (Fundadores)              │
-  D     ├──────────────────────────────┼──────────────────────────────┤
-  E     │      MONITOREAR (INFORMAR)   │     INVOLUCRAR ACTIVAMENTE    │
-  R     │  • Proveedores Rurales       │  • Equipo de Operaciones     │
-        │    (Posadas/Transporte/Guías)│  • Coordinador Financiero    │
-   BAJO └──────────────────────────────┴──────────────────────────────┘
-       BAJO                         INTERÉS                      ALTO
-```
+![Matriz Poder – Interés](./assets/estrategia_de_gestion.png)
 
 ### 2.2. Preocupaciones y Requisitos de Negocio derivados (Stakeholder Concerns → Business Requirements)
 
@@ -205,28 +193,8 @@ Los principios se agrupan en tres categorías: ética/gobierno, negocio/operaci�
 
 ### 8.2. Concepto de Solución — Vista de Alto Nivel (TO-BE)
 
-```
-+-----------------------------------------------------------------------------------+
-| CANALES DE ENTRADA                                                                 |
-| Agencias B2B (Portal Web) | Proveedores (WhatsApp Bot/PWA) | Operaciones (Dashboard)|
-+-----------------------------------------------------------------------------------+
-                                          |
-+-----------------------------------------------------------------------------------+
-| CAPA DE SERVICIOS / APIS                                                           |
-| API Gateway + Autenticación / Roles                                                |
-+-----------------------------------------------------------------------------------+
-                                          |
-+-----------------------------------------------------------------------------------+
-| LÓGICA DE NEGOCIO                                                                  |
-| Motor de Inventario | Motor de Cotizaciones | Motor de Liquidaciones               |
-| (Control de Cupos/Locks) | (Reglas de Margen/Paquetes) | (Conciliación Automática) |
-+-----------------------------------------------------------------------------------+
-                                          |
-+-----------------------------------------------------------------------------------+
-| CAPA DE DATOS E INFRAESTRUCTURA                                                    |
-| Base de Datos Transaccional (SQL/NoSQL PaaS) + Cola de Eventos / Bus               |
-+-----------------------------------------------------------------------------------+
-```
+arquitectura_de_plataforma
+![Concepto de Solución](./assets/arquitectura_de_plataforma.png)
 
 ### 8.3. Matriz de Valor para Stakeholders
 
