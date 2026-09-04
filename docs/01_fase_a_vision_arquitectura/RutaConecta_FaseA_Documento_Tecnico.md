@@ -193,7 +193,6 @@ Los principios se agrupan en tres categorías: ética/gobierno, negocio/operaci�
 
 ### 8.2. Concepto de Solución — Vista de Alto Nivel (TO-BE)
 
-arquitectura_de_plataforma
 ![Concepto de Solución](./assets/arquitectura_de_plataforma.png)
 
 ### 8.3. Matriz de Valor para Stakeholders
