@@ -17,12 +17,22 @@
 ## Índice
 
 1. [Contexto Estratégico, Reglas de Oro y Alcance Operativo (TOGAF Fase B)](#1-contexto-estratégico-reglas-de-oro-y-alcance-operativo-togaf-fase-b)
+   - 1.1. [Los Módulos Clave dentro del Alcance del Proyecto](#11-los-módulos-clave-dentro-del-alcance-del-proyecto)
+   - 1.2. [Cadenas de Valor Principales (Flujos de Valor)](#12-cadenas-de-valor-principales-flujos-de-valor)
 2. [Catálogo de Procesos y Diagrama de Actores de Negocio](#2-catálogo-de-procesos-y-diagrama-de-actores-de-negocio)
+   - 2.1. [Actores de Negocio y Responsabilidades](#21-actores-de-negocio-y-responsabilidades)
+   - 2.2. [Catálogo Estructurado de Procesos de Negocio](#22-catálogo-estructurado-de-procesos-de-negocio)
+   - 2.3. [Matriz de Roles y Responsabilidades Objetivo (RACI)](#23-matriz-de-roles-y-responsabilidades-objetivo-raci)
 3. [Arquitectura Base (Baseline Architecture - AS-IS)](#3-arquitectura-base-baseline-architecture---as-is)
+   - 3.1. [Diagnóstico del Estado Actual de Software, Datos y Operaciones](#31-diagnóstico-del-estado-actual-de-software-datos-y-operaciones)
 4. [Arquitectura Destino (Target Architecture - TO-BE)](#4-arquitectura-destino-target-architecture---to-be)
+   - 4.1. [Diseño de Capacidades y Reglas de Negocio TO-BE](#41-diseño-de-capacidades-y-reglas-de-negocio-to-be)
 5. [Análisis de Brechas (Gap Analysis) — La Matriz de Brechas](#5-análisis-de-brechas-gap-analysis--la-matriz-de-brechas)
+   - 5.1. [Matriz de Brechas Completa y Detallada para RutaConecta S.A.S.](#51-matriz-de-brechas-completa-y-detallada-para-rutaconecta-sas)
+   - 5.2. [Impacto Organizacional y Gestión del Cambio Operativo](#52-impacto-organizacional-y-gestión-del-cambio-operativo)
 6. [Diagramas de Arquitectura y Código para Draw.io / Mermaid](#6-diagramas-de-arquitectura-y-código-para-drawio--mermaid)
 7. [Conclusiones, Trazabilidad hacia la Fase C y Plan de Acción](#7-conclusiones-trazabilidad-hacia-la-fase-c-y-plan-de-acción)
+   - 7.1. [Matriz de Trazabilidad de Requisitos de Negocio](#71-matriz-de-trazabilidad-de-requisitos-de-negocio)
 8. [Referencias (APA 7.ª Edición)](#8-referencias-apa-7ª-edición)
 
 ---
@@ -45,6 +55,17 @@ Con el propósito de dejar "sellado" el alcance de la transformación y evitar l
 4. **Motor de Liquidación y Conciliación Financiera a Proveedores:** Motor automático de dispersión y cálculo de fondos que liquida tarifas netas a posaderos, guías y conductores en menos de 2 horas tras la ejecución del servicio, preservando los principios de Comercio Justo y transparencia.
 
 ---
+### 1.2. Cadenas de Valor Principales (Flujos de Valor)
+
+1. **VS-01: Captura de Demanda B2B a Reserva Confirmada**
+   - **Propósito:** Recibir solicitudes de cotización de agencias minoristas, verificar disponibilidad multi-proveedor, bloquear cupos y confirmar la reserva de forma instantánea.
+   - **Etapas:** Búsqueda de disponibilidad → Cotización consolidada → Bloqueo transaccional de cupo → Confirmación al cliente B2B → Notificación asíncrona al proveedor rural.
+
+2. **VS-02: Prestación del Servicio Rural a Liquidación Automatizada**
+   - **Propósito:** Asegurar la prestación efectiva del servicio turístico rural, validar el cumplimiento y ejecutar el pago neto transparente al proveedor local sin reprocesos manuales.
+   - **Etapas:** Prestación del servicio en campo → Registro de conformidad / comprobante digital → Conciliación de tarifa neta y comisión → Dispersión / orden de liquidación → Emisión de soporte digital.
+
+
 
 ## 2. Catálogo de Procesos y Diagrama de Actores de Negocio
 
@@ -70,6 +91,17 @@ Para garantizar la trazabilidad entre las partes interesadas y los flujos operat
 | **PROC-06** | **Gestión de Cancelaciones y Reembolsos** | Resolución ad-hoc por chat sin política estandarizada ni motor de reglas. | Motor de reglas de cancelación integrado que calcula penalidades y libera cupos en tiempo real. |
 
 ---
+### 2.3. Matriz de Roles y Responsabilidades Objetivo (RACI)
+
+| Proceso Objetivo (TO-BE) | Agencias B2B | Operaciones (Ruta) | Finanzas / Contab. | Proveedor Rural | Sistema Central |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Cotización y Autoconsulta B2B** | R | I | I | I | A |
+| **Reserva y Bloqueo Anti-Sobreventa** | R | I | I | I | A |
+| **Confirmación de Inventario Rural** | I | A | I | R | C |
+| **Liquidación de Tarifas Netas** | I | C | A | I | R |
+| **Auditoría y Gestión de Excepciones** | I | R / A | C | I | C |
+
+*Leyenda:* **R** = Responsable (Ejecuta); **A** = Aprobador (Rinde cuentas); **C** = Consultado; **I** = Informado.
 
 ## 3. Arquitectura Base (Baseline Architecture - AS-IS)
 
@@ -117,6 +149,22 @@ El Análisis de Brechas constituye la herramienta analítica central de la Fase 
 | **Motor de Cancelaciones y Reembolsos** | Gestión ad-hoc caso a caso por WhatsApp sin política uniforme. | Motor de reglas parametrizado según políticas de anticipación. | **NUEVO** | Codificar lógica de penalidades automáticas, devolución proporcional y liberación inmediata de cupos al inventario general. |
 
 ---
+## 5.2. Impacto Organizacional y Gestión del Cambio Operativo
+
+### Evolución de Roles y Reestructuración de Personal
+La automatización de las tareas repetitivas busca reorientar el talento humano de tareas operativas de bajo valor hacia actividades de supervisión analítica y crecimiento del negocio:
+
+| Rol Actual (AS-IS) | Rol Evolucionado (TO-BE) | Nuevas Funciones y Enfoque Estratégico |
+| :--- | :--- | :--- |
+| **Asistente de Cotizaciones Manuales** | Gestor de Excepciones y Servicio al Cliente B2B | Monitorear casos complejos, resolver disputas y brindar atención de alto valor a agencias clave. |
+| **Auxiliar de Verificación Telefónica** | Analista de Desarrollo Rural y Calidad de Proveedores | Trabajo de campo: Capacitar a nuevos posaderos, afiliar servicios turísticos y auditar estándares de calidad. |
+| **Auxiliar Contable de Conciliación** | Analista de Rentabilidad y Liquidación Automática | Analizar tableros de control en Looker Studio, monitorear márgenes netos por canal y supervisar dispersiones de dinero. |
+
+### Estrategia de Adopción e Inclusión Rural (Enfoque Prioritario en WhatsApp)[cite: 6]
+1. **Cero Curva de Aprendizaje:** Interacción exclusiva a través de WhatsApp Business API y SMS sin requerir descarga de aplicaciones pesadas ni creación de contraseñas complejas[cite: 6].
+2. **Tolerancia a Conectividad Nula (Diseño Fuera de Línea):** Notificaciones encoladas en GCP (mediante Pub/Sub / Cloud Tasks) que se entregan automáticamente cuando el dispositivo recupera cobertura móvil (2G/3G)[cite: 6].
+3. **Incentivos a la Disponibilidad:** Algoritmo de posicionamiento prioritario en búsquedas B2B para proveedores que mantengan su inventario actualizado de forma autónoma[cite: 6].
+4. **Despliegue Piloto Progresivo:** Fase de pruebas de 4 semanas con un grupo focal de 5 posadas y 2 agencias B2B aliadas antes del corte definitivo del sistema[cite: 6].
 
 ## 6. Diagramas de Arquitectura y Código para Draw.io / Mermaid
 
@@ -218,6 +266,21 @@ graph TD
 ---
 
 ## 7. Conclusiones, Trazabilidad hacia la Fase C y Plan de Acción
+
+## 7.1.Matriz de Trazabilidad de Requisitos de Negocio
+
+| Código BR | Requisito de Negocio | Proceso Objetivo Asociado | Capacidad de Negocio de Soporte | Métrica / Indicador de Verificación |
+| :--- | :--- | :--- | :--- | :--- |
+| **BR-01** | Soportar 3 veces el volumen de reservas sin aumento proporcional de personal. | PROC-TOBE-01 / PROC-TOBE-02 | Gestión de Inventarios y Cupos / Motor de Cotización | Reducción del 60% en el costo operativo por reserva. |
+| **BR-02** | Generar reportes gerenciales de margen por agencia y proveedor. | PROC-TOBE-04 | Inteligencia de Precios y Márgenes | Reportes ejecutivos en tiempo real en Looker Studio. |
+| **BR-03** | Cotización consolidada automática en menos de 5 minutos. | PROC-TOBE-01 | Motor de Cotización B2B | Tiempo de respuesta menor a 3 segundos ($p_{95}$). |
+| **BR-04** | Panel único de disponibilidad en tiempo real (Fuente Única de Verdad). | PROC-TOBE-02 | Sincronización de Inventarios | 100% de los datos en Cloud (0 hojas de cálculo). |
+| **BR-05** | Motor de liquidación con cálculo automático de tarifa neta y comisión. | PROC-TOBE-04 | Liquidación a Proveedores | Tiempo de dispersión menor a 2 horas tras la prestación del servicio. |
+| **BR-06** | Conciliación de servicios prestados frente a lo facturado sin cruces manuales. | PROC-TOBE-04 | Gestión Financiera y Contable | 0% de discrepancias en liquidaciones financieras. |
+| **BR-07** | Portal de autoservicio para agencias B2B con confirmación inmediata. | PROC-TOBE-01 / PROC-TOBE-02 | Portal de Autoservicio B2B | Incremento de la tasa de conversión B2B a más del 35%. |
+| **BR-08** | Garantía contractual de cero sobreventa sobre cupos confirmados. | PROC-TOBE-02 | Bloqueo Transaccional Anti-Sobreventa | Tasa de sobreventa = 0% absoluto. |
+| **BR-09** | Confirmación o rechazo de reservas por WhatsApp/SMS sin aplicaciones pesadas. | PROC-TOBE-03 | Canal e Inclusión Rural | Adopción rural por parte de proveedores mayor al 85%. |
+| **BR-10** | Notificación de liquidación con soporte digital descargable. | PROC-TOBE-03 / PROC-TOBE-04 | Inclusión Rural / Liquidación | Comprobantes digitales adjuntos mediante WhatsApp o correo electrónico. |
 
 La ejecución de la **Fase B (Arquitectura de Negocio)** permite cerrar de manera formal la brecha entre las aspiraciones comerciales de RutaConecta y su implementación tecnológica. La Matriz de Brechas desarrollada constituye el insumo directo para el diseño de la **Fase C (Arquitectura de Datos y Aplicaciones)**, dictando los siguientes requerimientos técnicos obligatorios:
 
